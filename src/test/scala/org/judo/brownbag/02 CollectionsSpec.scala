@@ -8,7 +8,7 @@ import org.scalatest.FunSpec
 
 // http://docs.scala-lang.org/resources/images/collections.immutable.png
 class CollectionsSpec extends FunSpec{
-
+  
   describe("List Syntax"){
     it("Lists with different creation syntax but same values should be equal" ){
 
