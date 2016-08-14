@@ -9,4 +9,8 @@ abstract sealed class Maybe[T] {
 
 }
 
-//case class Yes[T](val T)
+case class Yes[T](value: T) extends Maybe[T]
+
+case object No extends Maybe[Nothing] {
+  override val value: Nothing = throw new Exception("Invalid access of 'value' in No class")
+}
