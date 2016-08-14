@@ -17,16 +17,14 @@ trait AccountService{
 class AccountsController(service: AccountService) {
 
   def getUserTransactions(userId: String): Seq[AccountTransaction] = {
-    service.getUser(userId) match {
-      case No => Seq()
-      case Yes(user) => service.getUserAccount(user) match {
-        case No => Seq()
-        case Yes(userAccount) => service.getAccountTransactions(userAccount) match {
-          case No => Seq()
-          case Yes(transactions) => transactions
-        }
-      }
-    }
+
+    val retval = for {
+      user <- service.getUser(userId)
+      userAccount <- service.getUserAccount(user)
+      transactions <- service.getAccountTransactions(userAccount)
+    } yield transactions
+
+    if(retval.hasValue) retval.value else Seq()
   }
 
 }
