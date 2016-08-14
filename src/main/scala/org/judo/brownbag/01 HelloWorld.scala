@@ -5,27 +5,11 @@ package org.judo.brownbag
   */
 object HelloWorld extends App{
 
-  override def main(args: Array[String]): Unit = {
-
-    //const string name = GetName(args);
-    val name = getName(args)
-
-    if(name != null){
-      println(s"Hello, $name!")
-    }else{
-      println("Hello no-one!")
-    }
+  override def main(args: Array[String]): Unit = getName(args) match {
+    case Yes(name) => println(s"Hello, $name!")
+    case No => println("Hello World")
   }
 
-  def getName(args: Array[String]): String = {
-    //String name = null;
-    var name: String = null
+  def getName(args: Array[String]): Maybe[String] = if(args.length == 1) Yes(args(0)) else No
 
-    if(args.length == 1){
-      //name = args[0];
-      name = args(0)
-    }
-    //return name;
-    name
-  }
 }
