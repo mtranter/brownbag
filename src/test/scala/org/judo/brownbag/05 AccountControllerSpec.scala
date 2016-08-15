@@ -11,6 +11,7 @@ class AccountControllerSpec extends FunSpec with TableDrivenPropertyChecks{
   describe("AccountController"){
     describe("#getUserTransactions"){
       it("should return appropriate maybe value"){
+        
         forAll(examples) { (service: AccountService, result: Seq[AccountTransaction]) =>
 
           val sut = new AccountsController(service)
