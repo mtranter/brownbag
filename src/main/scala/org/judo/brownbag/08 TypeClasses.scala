@@ -7,11 +7,21 @@ import java.util.Date
   */
 
 object Calculator{
+  import  NumberLike._
+  def add[Number : NumberLike](a: Number, b: Number): Number = a + b
+  def subtract[Number : NumberLike](a: Number, b: Number): Number = a - b
+  def multiply[Number : NumberLike](a: Number, b: Number): Number = a * b
 
-  def add[Number : NumberLike](a: Number, b: Number): Number = implicitly[NumberLike[Number]].add(a,b)
-  def subtract[Number : NumberLike](a: Number, b: Number): Number = implicitly[NumberLike[Number]].subtract(a,b)
-  def multiply[Number : NumberLike](a: Number, b: Number): Number = implicitly[NumberLike[Number]].multiply(a,b)
+}
 
+object NumberLike{
+
+  implicit class NumberOps[T: NumberLike](t: T){
+    val numlike = implicitly[NumberLike[T]]
+    def +(other: T) = numlike.add(t, other)
+    def *(other: T) = numlike.multiply(t, other)
+    def -(other: T) = numlike.subtract(t, other)
+  }
 }
 
 
@@ -19,10 +29,6 @@ trait NumberLike[T]{
   def add(a: T, b: T): T
   def subtract(a: T, b: T): T
   def multiply(a: T, b: T): T
-
-
-
-
 }
 
 object NumberLikeInt extends NumberLike[Int]{
