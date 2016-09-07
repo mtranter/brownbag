@@ -55,6 +55,7 @@ class CollectionsSpec extends FunSpec{
   describe("Getting common factors with map and flatmap"){
     it("Should return the common factors of 1024 and 8688") {
       import Collections._
+
       val factorsOf1024 = factorsOf(1024)
       val factorsOf8688 = factorsOf(8688)
 
@@ -72,6 +73,7 @@ class CollectionsSpec extends FunSpec{
   describe("Getting common factors with for comprension"){
     it("Should return the common factors of 1024 and 8688") {
       import Collections._
+
       val factorsOf1024 = factorsOf(1024)
       val factorsOf8688 = factorsOf(8688)
 
