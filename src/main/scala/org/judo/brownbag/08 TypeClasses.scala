@@ -12,6 +12,15 @@ object Calculator{
   def multiply[Number](a: Number, b: Number)(implicit nl: NumberLike[Number]): Number = nl.multiply(a,b)
 }
 
+object NumberLike{
+  implicit class NumberOps[T: NumberLike](t: T){
+    val numlike = implicitly[NumberLike[T]]
+    def +(other: T) = numlike.add(t, other)
+    def *(other: T) = numlike.multiply(t, other)
+    def -(other: T) = numlike.subtract(t, other)
+  }
+}
+
 trait NumberLike[T]{
   def add(a: T, b: T): T
   def subtract(a: T, b: T): T
