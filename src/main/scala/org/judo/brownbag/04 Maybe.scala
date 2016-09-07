@@ -3,6 +3,8 @@ package org.judo.brownbag
 /**
   * Created by mark on 14/08/16.
   */
+
+//Covarianve, Contravariance
 abstract sealed class Maybe[+T] {
 
   def value: T

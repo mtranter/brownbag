@@ -9,23 +9,28 @@ class CsvWriterSpec extends FlatSpec with Matchers {
 
 
   "The CsvDeserializer" should "correctly deserialize a string value given an explicit reader" in {
-    val deserialzedString = CsvDeserialiser.readCsv("123")(new CsvTokenReader[String] {
-      override def read(token: String): String = token
+
+    val deserialzedString = CsvDeserialiser.readCsv("123")(new CsvTokenReader[Int] {
+      override def read(token: String): Int = token.toInt
     })
-    deserialzedString should be("123")
+
+    deserialzedString should be(123)
   }
 
 
   it should "correctly deserialize a int value given an explicit reader" in {
-    val deserialzedString = CsvDeserialiser.readCsv("123")(new CsvTokenReader[Int] {
-      override def read(token: String): Int = token.toInt
-    })
+
+    implicit val intReader = new CsvTokenReader[Int] { override def read(token: String) = token.toInt}
+
+    val deserialzedString = CsvDeserialiser.readCsv("123")
+
     deserialzedString should be(123)
   }
 
 
   it should "correctly deserialize a int value given an imported implicit reader" in {
     import DefaultFormats._
+
     val deserialzedString = CsvDeserialiser.readCsv[Int]("123")
     deserialzedString should be(123)
   }
@@ -39,10 +44,10 @@ class CsvWriterSpec extends FlatSpec with Matchers {
 
   it should "correctly deserialize a case class arity 1 given imported implicit formats" in {
     import MyFormats._
+
     val deserialzedString = CsvDeserialiser.readCsv[Name]("judo")
     deserialzedString should be(Name("judo"))
   }
-
   it should "correctly deserialize a case class arity 2 given imported implicit formats" in {
     import MyFormats._
     val deserialzedString = CsvDeserialiser.readCsv[FullName]("judo, payments")

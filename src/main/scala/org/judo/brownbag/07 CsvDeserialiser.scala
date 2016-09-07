@@ -34,6 +34,7 @@ trait DefaultFormats {
 
   implicit def format1[T, P1 : CR](ctr: P1 => T): CsvTokenReader[T] = new CsvTokenReader[T] {
     override def read(token: String): T = {
+
       val p1Reader = implicitly[CsvTokenReader[P1]]
       val p1 = p1Reader.read(token)
       ctr(p1)
