@@ -18,7 +18,7 @@ class FuncConversions extends FunSpec with Matchers {
       val sumOfDoubledEvens = jEnum.where(new Filter[Int] {
         override def filter(i: Int): Boolean = i % 2 == 0
       }).select(new Mapper[Int, Int] {
-        override def map(i: Int): Int = i * 2
+        override def map(i: Int): Int  = i * 2
       }).aggregate(0, new Aggregator[Int, Int] {
         override def aggregate(target: Int, source: Int): Int = target + source
       })
