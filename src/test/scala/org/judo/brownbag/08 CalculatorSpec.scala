@@ -12,6 +12,12 @@ class CalculatorSpec extends FunSpec with Matchers{
         val retval = Calculator.add(3,4)
         retval should be(7)
       }
+      /*
+      it("will shit itself for decimals"){
+        val retval = Calculator.add(4d, 5d)
+        retval should be(9d)
+      }
+      */
     }
   }
 }
