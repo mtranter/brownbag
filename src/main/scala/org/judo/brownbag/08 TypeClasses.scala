@@ -8,9 +8,9 @@ import java.util.Date
 
 object Calculator{
   import  NumberLike._
-  def add[Number : NumberLike](a: Number, b: Number): Number = a + b
-  def subtract[Number : NumberLike](a: Number, b: Number): Number = a - b
-  def multiply[Number : NumberLike](a: Number, b: Number): Number = a * b
+  def add[N: NumberLike](a: N, b: N): N = a + b
+  def subtract[N: NumberLike](a: N, b: N): N = a - b
+  def multiply[N: NumberLike](a: N, b: N): N = a * b
 }
 
 object NumberLike{
