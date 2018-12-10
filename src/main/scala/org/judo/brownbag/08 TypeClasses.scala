@@ -7,9 +7,10 @@ import java.util.Date
   */
 
 object Calculator{
-  def add[Number](a: Number, b: Number)(implicit nl: NumberLike[Number]): Number = nl.add(a,b)
-  def subtract[Number](a: Number, b: Number)(implicit nl: NumberLike[Number]): Number = nl.subtract(a,b)
-  def multiply[Number](a: Number, b: Number)(implicit nl: NumberLike[Number]): Number = nl.multiply(a,b)
+  import  NumberLike._
+  def add[Number : NumberLike](a: Number, b: Number): Number = a + b
+  def subtract[Number : NumberLike](a: Number, b: Number): Number = a - b
+  def multiply[Number : NumberLike](a: Number, b: Number): Number = a * b
 }
 
 object NumberLike{
