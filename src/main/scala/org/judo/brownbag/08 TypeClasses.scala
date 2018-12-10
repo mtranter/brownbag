@@ -9,16 +9,15 @@ import java.util.Date
 object Calculator{
   import  NumberLike._
   def add[N: NumberLike](a: N, b: N): N = a + b
-  def subtract[N: NumberLike](a: N, b: N): N = a - b
+  def subtract[N: NumberLike](a: N, b: N): N   = a - b
   def multiply[N: NumberLike](a: N, b: N): N = a * b
 }
 
 object NumberLike{
-  implicit class NumberOps[T: NumberLike](t: T){
-    val numlike = implicitly[NumberLike[T]]
-    def +(other: T) = numlike.add(t, other)
-    def *(other: T) = numlike.multiply(t, other)
-    def -(other: T) = numlike.subtract(t, other)
+  implicit class NumberOps[T: NumberLike](t: T)(implicit NL: NumberLike[T]){
+    def +(other: T) = NL.add(t, other)
+    def *(other: T) = NL.multiply(t, other)
+    def -(other: T) = NL.subtract(t, other)
   }
 }
 
