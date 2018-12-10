@@ -1,11 +1,5 @@
 package org.judo.brownbag
 
-import java.util.Date
-
-/**
-  * Created by mark on 07/09/16.
-  */
-
 object Calculator{
   import  NumberLike._
   def add[N: NumberLike](a: N, b: N): N = a + b
